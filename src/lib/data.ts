@@ -1,20 +1,20 @@
 import type { ServiceItem, CarouselSlide, CourseItem } from './types';
 
 const graphicDesignGallery = [
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.08 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.09 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.11 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.12 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.14 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.15 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.08 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.09 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.11 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.12 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.14 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.15 PM.jpeg', import.meta.url).href,
 ];
 
 const digitalPrintingGallery = [
-  new URL('../img/dp.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.06 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.08 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.59.17 PM.jpeg', import.meta.url).href,
-  new URL('../img/WhatsApp Image 2026-10-19 at 2.58.27 PM.jpeg', import.meta.url).href,
+  new URL('/img/dp.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.06 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.08 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.59.17 PM.jpeg', import.meta.url).href,
+  new URL('/img/WhatsApp Image 2026-10-19 at 2.58.27 PM.jpeg', import.meta.url).href,
 ];
 
 export const services: ServiceItem[] = [
@@ -64,7 +64,7 @@ export const services: ServiceItem[] = [
     description:
       'High-quality digital and large-format printing for banners, posters, signs, and promotional materials.',
     icon: 'Printer',
-    image: 'src/img/dp.jpeg',
+    image: '/img/dp.jpeg',
     category: 'Quality',
     gallery: digitalPrintingGallery,
   },
@@ -73,7 +73,7 @@ export const services: ServiceItem[] = [
     description:
       'Professional photography for events, products, and corporate profiles that tells your story beautifully.',
     icon: 'Camera',
-    image: 'src/img/p.jpeg',
+    image: '/img/p.jpeg',
     category: 'Creativity',
   },
   {
@@ -81,7 +81,7 @@ export const services: ServiceItem[] = [
     description:
       'Customized branded merchandise — mugs, t-shirts, bags, and more — to promote your organization with style.',
     icon: 'Gift',
-    image: 'src/img/WhatsApp Image 2026-10-19 at 2.59.17 PM.jpeg',
+    image: '/img/WhatsApp Image 2026-10-19 at 2.59.17 PM.jpeg',
     category: 'Quality',
   },
 ];
@@ -91,21 +91,21 @@ export const carouselSlides: CarouselSlide[] = [
     title: 'Learn In-Demand Tech Skills',
     subtitle:
       'From coding to design, our hands-on courses prepare you for a thriving career in the digital economy.',
-    image: 'src/img/dp.jpeg',
+    image: '/img/dp.jpeg',
     cta: { label: 'Explore Courses', section: 'services' },
   },
   {
     title: 'Build. Brand. Grow.',
     subtitle:
       'Web development, corporate branding, and printing — everything your business needs under one roof.',
-    image: 'src/img/p.jpeg',
+    image: '/img/p.jpeg',
     cta: { label: 'Our Services', section: 'services' },
   },
   {
     title: 'Technology • Creativity • Quality',
     subtitle:
       'Kingstome Digital Hub combines expertise and creativity to help individuals and organizations achieve their goals.',
-    image: 'src/img/WhatsApp Image 2026-10-19 at 2.59.08 PM.jpeg',
+    image: '/img/WhatsApp Image 2026-10-19 at 2.59.08 PM.jpeg',
     cta: { label: 'Join the School', section: 'contact' },
   },
 ];

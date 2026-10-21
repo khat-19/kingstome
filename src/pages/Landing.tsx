@@ -291,7 +291,7 @@ function OwnerSection() {
               <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary-200 to-accent-200 opacity-60 blur-xl" />
               <div className="relative overflow-hidden rounded-[1.75rem] shadow-2xl">
                 <img
-                  src="src/img/kinimage.jpeg"
+                  src="/img/kinimage.jpeg"
                   alt="Founder & CEO of Kingstome Digital Hub"
                   className="h-full w-full object-cover"
                 />
