@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   GraduationCap,
   Mail,
@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import type { Page, SectionId } from '@/lib/types';
 import { useAuth } from '@/lib/auth';
-import { supabase } from '@/lib/supabase';
 import { programs, educationLevels, courses } from '@/lib/data';
 
 interface PortalProps {
@@ -33,118 +32,43 @@ interface Profile {
 
 export default function Portal({ onNavigate, onScrollTo }: PortalProps) {
   const { user, signOut } = useAuth();
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [profile, setProfile] = useState<Profile>(() => ({
+    id: user?.id ?? '',
+    full_name: user?.fullName ?? '',
+    phone: user?.phone || null,
+    program: user?.program || null,
+    education_level: user?.educationLevel || null,
+    bio: null,
+  }));
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const [editForm, setEditForm] = useState({
-    fullName: '',
-    phone: '',
-    program: '',
-    educationLevel: '',
+    fullName: user?.fullName ?? '',
+    phone: user?.phone ?? '',
+    program: user?.program ?? '',
+    educationLevel: user?.educationLevel ?? '',
     bio: '',
   });
 
-  useEffect(() => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-    (async () => {
-      const { data, error } = await supabase
-        .from('student_profiles')
-        .select('id, full_name, phone, program, education_level, bio')
-        .eq('id', user.id)
-        .maybeSingle();
-
-      if (error) {
-        console.warn('Profile fetch error:', error.message);
-      }
-      if (data) {
-        setProfile(data as Profile);
-        setEditForm({
-          fullName: (data as Profile).full_name || '',
-          phone: (data as Profile).phone || '',
-          program: (data as Profile).program || '',
-          educationLevel: (data as Profile).education_level || '',
-          bio: (data as Profile).bio || '',
-        });
-      }
-      setLoading(false);
-    })();
-  }, [user]);
-
-  const handleSave = async (e: React.FormEvent) => {
+  const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
-    setSaving(true);
     setMessage(null);
-
-    if (profile) {
-      const { error } = await supabase
-        .from('student_profiles')
-        .update({
-          full_name: editForm.fullName,
-          phone: editForm.phone || null,
-          program: editForm.program || null,
-          education_level: editForm.educationLevel || null,
-          bio: editForm.bio || null,
-        })
-        .eq('id', user.id);
-
-      if (error) {
-        setMessage({ type: 'error', text: error.message });
-      } else {
-        setMessage({ type: 'success', text: 'Profile updated successfully.' });
-        setProfile({
-          ...profile,
-          full_name: editForm.fullName,
-          phone: editForm.phone || null,
-          program: editForm.program || null,
-          education_level: editForm.educationLevel || null,
-          bio: editForm.bio || null,
-        });
-      }
-    } else {
-      const { error } = await supabase.from('student_profiles').insert({
-        id: user.id,
-        full_name: editForm.fullName,
-        phone: editForm.phone || null,
-        program: editForm.program || null,
-        education_level: editForm.educationLevel || null,
-        bio: editForm.bio || null,
-      });
-
-      if (error) {
-        setMessage({ type: 'error', text: error.message });
-      } else {
-        setMessage({ type: 'success', text: 'Profile created successfully.' });
-        setProfile({
-          id: user.id,
-          full_name: editForm.fullName,
-          phone: editForm.phone || null,
-          program: editForm.program || null,
-          education_level: editForm.educationLevel || null,
-          bio: editForm.bio || null,
-        });
-      }
-    }
-    setSaving(false);
+    setProfile({
+      id: user.id,
+      full_name: editForm.fullName,
+      phone: editForm.phone || null,
+      program: editForm.program || null,
+      education_level: editForm.educationLevel || null,
+      bio: editForm.bio || null,
+    });
+    setMessage({ type: 'success', text: 'Profile updated for this preview session.' });
   };
 
   const handleSignOut = async () => {
     await signOut();
     onNavigate('home');
   };
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center pt-16">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-200 border-t-primary-600" />
-      </div>
-    );
-  }
 
   if (!user) {
     return (
@@ -346,8 +270,8 @@ export default function Portal({ onNavigate, onScrollTo }: PortalProps) {
                   />
                 </div>
 
-                <button type="submit" disabled={saving} className="btn-primary">
-                  {saving ? 'Saving...' : 'Save Profile'}
+                <button type="submit" className="btn-primary">
+                  Save Profile
                   <Save className="h-4 w-4" />
                 </button>
               </form>

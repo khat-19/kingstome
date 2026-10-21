@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, LogOut, LayoutDashboard } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import type { Page, SectionId } from '@/lib/types';
-import { useAuth } from '@/lib/auth';
 import Logo from './Logo';
 
 interface NavbarProps {
@@ -21,7 +20,6 @@ const sectionLinks: { label: string; section: SectionId }[] = [
 export default function Navbar({ onNavigate, onScrollTo, activeSection }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -38,11 +36,6 @@ export default function Navbar({ onNavigate, onScrollTo, activeSection }: Navbar
   const goPage = (page: Page) => {
     onNavigate(page);
     setMobileOpen(false);
-  };
-
-  const handleSignOut = async () => {
-    await signOut();
-    goPage('home');
   };
 
   const isHome = activeSection !== undefined;
@@ -80,30 +73,6 @@ export default function Navbar({ onNavigate, onScrollTo, activeSection }: Navbar
             ))}
         </div>
 
-        {/* <div className="hidden items-center gap-2 md:flex">
-          {user ? (
-            <>
-              <button onClick={() => goPage('portal')} className="btn-outline !py-2 !px-4">
-                <LayoutDashboard className="h-4 w-4" />
-                Portal
-              </button>
-              <button onClick={handleSignOut} className="btn-primary !py-2 !px-4">
-                <LogOut className="h-4 w-4" />
-                Sign Out
-              </button>
-            </>
-          ) : (
-            <>
-              <button onClick={() => goPage('login')} className="btn-outline !py-2 !px-4">
-                Login
-              </button>
-              <button onClick={() => goPage('register')} className="btn-primary !py-2 !px-4">
-                Register
-              </button>
-            </>
-          )}
-        </div> */}
-
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="rounded-lg p-2 text-neutral-800 transition hover:bg-neutral-100 md:hidden"
@@ -130,25 +99,12 @@ export default function Navbar({ onNavigate, onScrollTo, activeSection }: Navbar
               </button>
             ))}
             <div className="my-2 h-px bg-neutral-200" />
-            {user ? (
-              <>
-                <button onClick={() => goPage('portal')} className="btn-outline !justify-start">
-                  <LayoutDashboard className="h-4 w-4" /> Student Portal
-                </button>
-                <button onClick={handleSignOut} className="btn-primary !justify-start">
-                  <LogOut className="h-4 w-4" /> Sign Out
-                </button>
-              </>
-            ) : (
-              <>
-                <button onClick={() => goPage('login')} className="btn-outline !justify-start">
-                  Login
-                </button>
-                <button onClick={() => goPage('register')} className="btn-primary !justify-start">
-                  Register
-                </button>
-              </>
-            )}
+            <button onClick={() => goPage('login')} className="btn-outline !justify-start">
+              Student Login
+            </button>
+            <button onClick={() => goPage('register')} className="btn-primary !justify-start">
+              Register
+            </button>
           </div>
         </div>
       )}

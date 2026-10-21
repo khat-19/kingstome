@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import type { Page } from '@/lib/types';
 import { useAuth } from '@/lib/auth';
-import { supabase } from '@/lib/supabase';
 import { programs, educationLevels } from '@/lib/data';
 import Logo from '@/components/Logo';
 
@@ -56,25 +55,17 @@ export default function Register({ onNavigate, onSuccess }: RegisterProps) {
     }
 
     setLoading(true);
-    const { error: signUpError } = await signUp(form.email, form.password);
+    const { error: signUpError } = await signUp(form.email, form.password, {
+      fullName: form.fullName,
+      phone: form.phone,
+      program: form.program,
+      educationLevel: form.educationLevel,
+    });
 
     if (signUpError) {
       setLoading(false);
       setError(signUpError);
       return;
-    }
-
-    // Save profile to student_profiles table
-    const { error: profileError } = await supabase.from('student_profiles').insert({
-      full_name: form.fullName,
-      phone: form.phone || null,
-      program: form.program || null,
-      education_level: form.educationLevel || null,
-    });
-
-    if (profileError) {
-      // Profile save failed but account was created — still proceed
-      console.warn('Profile save failed:', profileError.message);
     }
 
     setLoading(false);

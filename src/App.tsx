@@ -14,7 +14,7 @@ function AppContent() {
   const [page, setPage] = useState<Page>('home');
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [activeSection, setActiveSection] = useState<SectionId>('home');
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
 
   const scrollTo = (id: SectionId) => {
     if (page !== 'home') {
@@ -34,7 +34,7 @@ function AppContent() {
       setPage('login');
       return;
     }
-    if ((next === 'login' || next === 'register') && user && !loading) {
+    if ((next === 'login' || next === 'register') && user) {
       setPage('portal');
       return;
     }
@@ -51,13 +51,6 @@ function AppContent() {
     setPage('portal');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  // Auto-redirect to portal after login/register if already authed
-  useEffect(() => {
-    if (!loading && user && (page === 'login' || page === 'register')) {
-      setPage('portal');
-    }
-  }, [user, loading, page]);
 
   // Scroll-spy: track which section is in view when on home
   useEffect(() => {
