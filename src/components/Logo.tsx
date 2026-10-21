@@ -12,7 +12,7 @@ export default function Logo({ className = '', variant = 'dark' }: LogoProps) {
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-30 to-primary-700 shadow-lg shadow-primary-400/30">
-        <img src="src/img/lokin.png" alt="" />
+        <img src="/img/lokin.png" alt="" />
         {/* <Cpu className="h-5 w-5 text-white" /> */}
       </div>
       <div className="leading-tight">
