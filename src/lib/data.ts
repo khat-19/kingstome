@@ -87,13 +87,13 @@ export const services: ServiceItem[] = [
 ];
 
 export const carouselSlides: CarouselSlide[] = [
-  {
-    title: 'Learn In-Demand Tech Skills',
-    subtitle:
-      'From coding to design, our hands-on courses prepare you for a thriving career in the digital economy.',
-    image: '/img/dp.jpeg',
-    cta: { label: 'Explore Courses', section: 'services' },
-  },
+  // {
+  //   title: 'Learn In-Demand Tech Skills',
+  //   subtitle:
+  //     'From coding to design, our hands-on courses prepare you for a thriving career in the digital economy.',
+  //   image: '/img/dp.jpeg',
+  //   cta: { label: 'Explore Courses', section: 'services' },
+  // },
   {
     title: 'Build. Brand. Grow.',
     subtitle:
@@ -106,7 +106,7 @@ export const carouselSlides: CarouselSlide[] = [
     subtitle:
       'Kingstome Digital Hub combines expertise and creativity to help individuals and organizations achieve their goals.',
     image: '/img/WhatsApp Image 2026-10-19 at 2.59.08 PM.jpeg',
-    cta: { label: 'Join the School', section: 'contact' },
+    cta: { label: 'Join the change', section: 'contact' },
   },
 ];
 
